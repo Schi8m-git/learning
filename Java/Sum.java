@@ -1,7 +1,7 @@
 package com.company;
 import java.util.Scanner;
 
-public class Main
+public class Sum
 {
 	public static void main(String[] args) {
 		int a, b, c, do_not_close_the_window;
