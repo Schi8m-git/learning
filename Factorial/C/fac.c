@@ -1,6 +1,7 @@
 #include <stdio.h>
 int main(){
-	int i, n, k, S;
+	int i, n, k;
+	float S;
 	scanf("%d", &n);
 	
 		k=1;
@@ -11,6 +12,6 @@ int main(){
 		i=i+k;
 		S=S*i;
 	}
-	printf("%d\n", S);
+	printf("%e\n", S);
 
 }
