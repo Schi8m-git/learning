@@ -1,17 +1,14 @@
 #include <stdio.h>
 int main(){
-	int i, n, k;
-	float S;
-	scanf("%d", &n);
-	
-		k=1;
-		S=1;
+	int i, number;
+	long double result;
+	scanf("%d", &number);
+		result=1;
 		i=1;
-	
-	while(i!=n){
-		i=i+k;
-		S=S*i;
+	while(i!=number){
+		i=i+1;
+		result=result*i;
 	}
-	printf("%e\n", S);
+	printf("%LF\n", result);
 
 }

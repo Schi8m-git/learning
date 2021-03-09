@@ -3,15 +3,15 @@ import java.util.Scanner;
 public class fac{
 
 	public static void main(String[] args) {
-		int n, i, k, S;
+		int number, i, result;
 		Scanner num = new Scanner(System.in);
-		n = num.nextInt();
+		number = num.nextInt();
 		i = 0;
-		S = 1;
-		while (i != n){
+		result = 1;
+		while (i != number){
 			i=i+1;
-			S=S*i;
+			result=result*i;
 		}
-		System.out.println(S);
+		System.out.println(result);
 	}
 }

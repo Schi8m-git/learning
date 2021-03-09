@@ -1,9 +1,9 @@
-s=1
+result=1
 i=1
-n=gets
-n=n.to_i
-while i!=n do 
+number=gets
+number=number.to_i
+while i!=number do 
 	i=i+1
-	s=s*i
+	result=result*i
 end
-puts(s)
+puts(result)
