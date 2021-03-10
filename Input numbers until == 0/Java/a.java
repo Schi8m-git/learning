@@ -5,10 +5,8 @@ public class a{
 		int a;
 		Scanner num = new Scanner(System.in);
 		a = num.nextInt();
-		if (a!=0){
 		while (a!=0){
 			a = num.nextInt();
-			}
 		}
 	}
 }
