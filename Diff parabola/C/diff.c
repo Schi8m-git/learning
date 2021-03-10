@@ -15,6 +15,6 @@ int main(){
 			max=delt;
 		}
 	}
-	printf("%lf\n", max);
+	printf("%f\n", max);
 		
 }
