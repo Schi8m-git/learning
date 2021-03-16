@@ -1,7 +1,8 @@
 #include <stdio.h>
 int main(){
 	float x1,x2,x,d,dx,max,dy1,dy2,delt;
-	scanf("%f%f\n",&x1,&x2);
+	scanf("%f\n",&x1);
+	scanf("%f\n",&x2);
 	d=x2-x1;
 	dx=d/100;
 	x=x1;
