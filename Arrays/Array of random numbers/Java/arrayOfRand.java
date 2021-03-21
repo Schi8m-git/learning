@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class arrayOfRand{
 	public static void main(String[] args){
-		int arrayLength, i, resultNumber;
+		int arrayLength, i;
 		Scanner scan = new Scanner(System.in);
 		i = 0;
 		int[] arrayOfRand;
@@ -11,12 +11,10 @@ public class arrayOfRand{
 
 
 		while (i<arrayLength){
-			resultNumber = i * (int) (Math.random()*100);
-			arrayOfRand[i] = resultNumber;
-			i = i + 1;
+			arrayOfRand[i] = i * (int) (Math.random()*100);
+			System.out.print(arrayOfRand[i] + " ");
+			i = i + 1;	
 		}
-		for(int n=0; n<i; n++){
-			System.out.println(arrayOfRand[n]);
-		}
+		System.out.println("");
 	}
 }
