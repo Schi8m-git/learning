@@ -5,7 +5,7 @@ public class mainDiagonal{
 		int arrayLength, i,j,k;
 		j = 0;
 		k = 0;
-		arrayLength = (int)(Math.random()*10);
+		arrayLength = 1 + (int)(Math.random()*10);
 		int[][] matrix = new int [arrayLength+1][arrayLength+1];
 
 		System.out.println("Матрица:");

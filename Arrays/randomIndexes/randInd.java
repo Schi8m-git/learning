@@ -2,8 +2,8 @@ import java.util.Arrays;
 public class randInd{
 	public static void main(String[] args){
 		int arrayLength, arrayWidth, i, j, maxValue;
-		arrayLength = (int)(Math.random()*10);
-		arrayWidth = (int)(Math.random()*10);
+		arrayLength = 1 + (int)(Math.random()*10);
+		arrayWidth = 1 + (int)(Math.random()*10);
 
 		int[][] matrix = new int [arrayLength+1][arrayWidth+1];
 		
