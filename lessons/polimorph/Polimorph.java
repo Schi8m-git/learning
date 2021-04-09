@@ -10,48 +10,48 @@ public class Polimorph{
 
 		//Заполнение массивов случайными числами от 0 до 100
 
-		for (int i=0;i<arrayLength;i++){
-			for(int j=0;j<arrayWidth;j++){
+		for (int i=0;i<intArray.length;i++){
+			for(int j=0;j<intArray[i].length;j++){
 				intArray[i][j] = (int)(Math.random()*100);
 			}
 		}
 
-		for (int i=0; i<arrayLength;i++){
-			for (int j=0; i<arrayWidth;j++){
+		for (int i=0; i<doubleArray.length;i++){
+			for (int j=0; j<doubleArray[i].length;j++){
 				doubleArray[i][j] = (Math.random()*100);
 			}
 		}
 
-		for (int i=0;i<arrayLength;i++){
-			for (int j=0; j<arrayWidth;j++){
+		for (int i=0;i<stringArray.length;i++){
+			for (int j=0; j<stringArray[i].length;j++){
 				stringArray[i][j] = "" + (int)(Math.random()*100);
 			}
 		}
 
-		printArray(arrayLength, arrayLength,intArray);
-		printArray(arrayLength, arrayLength,doubleArray);
-		printArray(arrayLength, arrayLength,stringArray);
+		printArray(intArray);
+		printArray(doubleArray);
+		printArray(stringArray);
 	}
 
-	public static void printArray(int arrLength, int arrWidth, int[][] arr){
-		for(int i=0;i<arrLength;i++){
-			for(int j=0;j<arrWidth;j++){
+	public static void printArray(int[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[i].length;j++){
 				System.out.print(arr[i][j] + " ");
 			}
 			System.out.println();
 		}
 	}
-	public static void printArray(int arrLength, int arrWidth, double[][]arr){
-		for(int i=0;i<arrLength;i++){
-			for(int j=0;j<arrWidth;j++){
+	public static void printArray(double[][]arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[i].length;j++){
 				System.out.print(arr[i][j] + " ");
 			}
 			System.out.println();
 		}
 	}
-	public static void printArray(int arrLength, int arrWidth, String[][] arr){
-		for(int i=0;i<arrLength;i++){
-			for(int j=0;j<arrWidth;j++){
+	public static void printArray(String[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[i].length;j++){
 				System.out.print(arr[i][j] + " ");
 			}
 			System.out.println();
