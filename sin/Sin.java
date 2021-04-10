@@ -2,74 +2,73 @@ import java.util.Scanner;
 
 public class Sin{
 	public static void main(String[] args){
+		int i = 1;
+		int j = 1;
+		double factorial = 1;
+		double	currentValue = 0;
+		double  previousValue = 0;
+		double sum = 0;
+
 		Scanner scan = new Scanner(System.in);
 		String result = "";
 		
 		int arg = 5;
 		
 
-		System.out.println("Введите необходимую точность от 1 до 5:");
-		int accuracyValue = scan.nextInt();	
-		if (accuracyValue<1 | accuracyValue>5){
-			accuracyValue = 1 + (int)(Math.random()*5);
-			System.out.println("Вы указали неверное значение, точность установлена случайным образом на " + accuracyValue);
-		}
-
-		//Т.к. есть примерно минимальное кол-во выполнений, чтобы значение хотя бы укладывалось в 1
-		accuracyValue += 6;
+		System.out.println("Введите необходимую точность:");
+		double accuracyValue = scan.nextDouble();	
 		
-		result = countSin(accuracyValue, arg);
+		result = getSinValue(accuracyValue, arg, i, j, factorial, currentValue, previousValue, sum);
 
 		System.out.println(result);
 
 	}
 
 
-	public static String countSin(int accuracyValue, int x){
-		double sum=0;
-		int j = 1;
-		long factorial = 1;
-		String sumResult = "";
-
-		for (int i=1; i<=accuracyValue; i++){
-			for (int k = 1; k<=j; k++){
-				factorial = factorial*k;
-			}
+	public static String getSinValue(double accuracy, int x, int i, int j, double factorial, double currentValue, double previousValue, double sum){
+		for(double e = 1; e>=accuracy; e = Math.abs(currentValue-previousValue)){
+			factorial = getFactorial(j);
 			if (i/2*2 == i){
+				previousValue = sum;
 				sum = sum - (double)(Math.pow(x, j))/factorial;
+				currentValue = sum;
 			}else{
+				previousValue = sum;
 				sum = sum + (double)(Math.pow(x, j))/factorial;
-			}
-			j += 2;
+				currentValue = sum;
+			}	
 			factorial = 1;
-
-			
+			j += 2;
+			i += 1;
 		}
-		sumResult = sumResult + sum;
-		return sumResult;
+		String result = "" + sum;
+		return result;
 	}
 
-	public static String countSin(int accuracyValue, double x){
-		double sum=0;
-		int j = 1;
-		long factorial = 1;
-		String sumResult = "";
-
-		for (int i=1; i<=accuracyValue; i++){
-			for (int k = 1; k<=j; k++){
-				factorial = factorial*k;
-			}
+	public static String getSinValue(double accuracy, double x, int i, int j, double factorial, double currentValue, double previousValue, double sum){
+		for(double e = 1; e>=accuracy; e = Math.abs(currentValue-previousValue)){
+			factorial = getFactorial(j);
 			if (i/2*2 == i){
+				previousValue = sum;
 				sum = sum - (double)(Math.pow(x, j))/factorial;
+				currentValue = sum;
 			}else{
+				previousValue = sum;
 				sum = sum + (double)(Math.pow(x, j))/factorial;
-			}
-			j += 2;
+				currentValue = sum;
+			}	
 			factorial = 1;
-
-			
+			j += 2;
+			i += 1;
 		}
-		sumResult = sumResult + sum;
-		return sumResult;
+		String result = "" + sum;
+		return result;
+	}
+	public static double getFactorial(int j){
+		double factorial = 1;
+		for (int k = 1; k<=j; k++){
+				factorial = factorial * k;
+			}
+		return factorial;
 	}
 }
