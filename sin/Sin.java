@@ -36,7 +36,6 @@ public class Sin{
 			currentValue = sum;
 			e = Math.abs(currentValue-previousValue);
 			System.out.println(sum);
-			factorial = 1;
 			j += 2;
 			i += 1;
 		}
