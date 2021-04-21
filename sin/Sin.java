@@ -23,11 +23,13 @@ public class Sin{
 			int i = 1;
 			int j = 1;
 			double factorial = 1;
-			double	currentValue = 0;
+			double	currentValue = 1;
 			double  previousValue = 0;
 			double sum = 0;
-		for(double e = 1; e>=accuracy; e = Math.abs(currentValue-previousValue)){
+			double e = Math.abs(currentValue-previousValue);
 
+		while(e>=accuracy){
+	
 			factorial = getFactorial(j);
 			if (i/2*2 == i){
 				previousValue = sum;
@@ -38,6 +40,7 @@ public class Sin{
 				sum = sum + (double)(Math.pow(x, j))/factorial;
 				currentValue = sum;
 			}	
+			e = Math.abs(currentValue-previousValue);
 			factorial = 1;
 			j += 2;
 			i += 1;
