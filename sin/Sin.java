@@ -22,7 +22,7 @@ public class Sin{
 	public static double getSinValue(double accuracy, double x){
 			int i = 1;
 			int j = 1;
-			double factorial = 1;
+			double factorial;
 			double	currentValue = 1;
 			double  previousValue = 0;
 			double sum = 0;
@@ -31,16 +31,11 @@ public class Sin{
 		while(e>=accuracy){
 	
 			factorial = getFactorial(j);
-			if (i/2*2 == i){
-				previousValue = sum;
-				sum = sum - (double)(Math.pow(x, j))/factorial;
-				currentValue = sum;
-			}else{
-				previousValue = sum;
-				sum = sum + (double)(Math.pow(x, j))/factorial;
-				currentValue = sum;
-			}	
+			previousValue = sum;
+			sum = (i/2*2==i) ? (sum - (double)(Math.pow(x, j))/factorial) : (sum + (double)(Math.pow(x, j))/factorial);
+			currentValue = sum;
 			e = Math.abs(currentValue-previousValue);
+			System.out.println(sum);
 			factorial = 1;
 			j += 2;
 			i += 1;
