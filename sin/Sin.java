@@ -35,7 +35,6 @@ public class Sin{
 			sum = (i/2*2==i) ? (sum - (double)(Math.pow(x, j))/factorial) : (sum + (double)(Math.pow(x, j))/factorial);
 			currentValue = sum;
 			e = Math.abs(currentValue-previousValue);
-			System.out.println(sum);
 			j += 2;
 			i += 1;
 		}
