@@ -17,13 +17,12 @@ public class Sin{
 
 
 	public static double getSinValue(double accuracy, int arg){
-		double x = (double) arg;
-		return sinCounter(accuracy, x);
+		return sinCounter(accuracy, (double) arg);
 	}
 
 	public static double getSinValue(double accuracy, double arg){
 		double x = (double) arg;
-		return sinCounter(accuracy, x);
+		return sinCounter(accuracy, (double) arg);
 	}
 
 	public static double sinCounter(double accuracy, double x){
