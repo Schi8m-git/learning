@@ -13,22 +13,19 @@ public class Sin{
 
 		result = getSinValue(accuracyValue, arg);
 		System.out.println(result);
-
 	}
 
 
 	public static double getSinValue(double accuracy, int arg){
 		double x = (double) arg;
-		sinCounter(accuracy, x);
-		double countResult = sinCounter(accuracy, x);
-		return countResult;
+		return sinCounter(accuracy, x);
 	}
+
 	public static double getSinValue(double accuracy, double arg){
 		double x = (double) arg;
-		double countResult = sinCounter(accuracy, x);
-		return countResult;
-
+		return sinCounter(accuracy, x);
 	}
+
 	public static double sinCounter(double accuracy, double x){
 			int i = 1;
 			int j = 1;
