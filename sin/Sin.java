@@ -5,9 +5,7 @@ public class Sin{
 		Scanner scan = new Scanner(System.in);
 		double result;
 		
-		int input = 5;
-		
-		double arg = (double)input;
+		int arg = 5;
 		
 
 		System.out.println("Введите необходимую точность:");
@@ -19,7 +17,19 @@ public class Sin{
 	}
 
 
-	public static double getSinValue(double accuracy, double x){
+	public static double getSinValue(double accuracy, int arg){
+		double x = (double) arg;
+		sinCounter(accuracy, x);
+		double countResult = sinCounter(accuracy, x);
+		return countResult;
+	}
+	public static double getSinValue(double accuracy, double arg){
+		double x = (double) arg;
+		double countResult = sinCounter(accuracy, x);
+		return countResult;
+
+	}
+	public static double sinCounter(double accuracy, double x){
 			int i = 1;
 			int j = 1;
 			double factorial;
@@ -28,7 +38,7 @@ public class Sin{
 			double sum = 0;
 			double e = Math.abs(currentValue-previousValue);
 
-		while(e>=accuracy){
+			while(e>=accuracy){
 	
 			factorial = getFactorial(j);
 			previousValue = sum;
@@ -40,6 +50,7 @@ public class Sin{
 		}
 		return sum;
 	}
+
 	public static double getFactorial(int j){
 
 		double factorial = 1;
