@@ -16,13 +16,13 @@ public class Main{
 
 		switch(x){
 			case 1:
-			sin.sinCounter();
+			sin.countSin();
 			break;
 			case 2:
-			cos.cosCounter();
+			cos.countCos();
 			break;
 			case 3:
-			tg.tgCounter();
+			tg.countTg();
 			break;
 		} 
 	}

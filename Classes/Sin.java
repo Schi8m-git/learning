@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Sin{
-	public static void sinCounter(){
+	public static void countSin(){
 		System.out.println("Введи значение аргумента");
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
@@ -12,7 +12,16 @@ public class Sin{
 		double sin = getSinValue(accuracy, arg);
 		System.out.println("Sin("+arg+")="+sin);
 	}
-public static double getSinValue(double accuracy, double x){
+
+public static double getSinValue(double accuracy, int arg){
+		return sinCounter(accuracy, (double) arg);
+	}
+
+	public static double getSinValue(double accuracy, double arg){
+		return sinCounter(accuracy, (double) arg);
+	}
+
+	public static double sinCounter(double accuracy, double x){
 			int i = 1;
 			int j = 1;
 			double factorial;
@@ -21,11 +30,12 @@ public static double getSinValue(double accuracy, double x){
 			double sum = 0;
 			double e = Math.abs(currentValue-previousValue);
 
-		while(e>=accuracy){
+			while(e>=accuracy){
 	
 			factorial = getFactorial(j);
 			previousValue = sum;
-			sum = (i/2*2==i) ? (sum - (double)(Math.pow(x, j))/factorial) : (sum + (double)(Math.pow(x, j))/factorial);
+			double powValue = (double)(Math.pow(x, j))/factorial;
+			sum = (i/2*2==i) ? (sum - powValue) : (sum + powValue);
 			currentValue = sum;
 			e = Math.abs(currentValue-previousValue);
 			j += 2;
@@ -33,6 +43,7 @@ public static double getSinValue(double accuracy, double x){
 		}
 		return sum;
 	}
+
 	public static double getFactorial(int j){
 
 		double factorial = 1;

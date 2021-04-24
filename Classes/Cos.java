@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Cos{
-	public static void cosCounter(){
+	public static void countCos(){
 		System.out.println("Введи значение аргумента");
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
@@ -14,7 +14,15 @@ public class Cos{
 		
 	}
 
+	public static double getCosValue(double accuracy, int x){
+		return сosCounter(accuracy, (double) x);	
+	}
+
 	public static double getCosValue(double accuracy, double x){
+		return сosCounter(accuracy, (double) x);	
+	}
+
+	public static double сosCounter(double accuracy, double x){
 		int i = 0;
 		int j = 2;
 		double factorial;
@@ -27,7 +35,8 @@ public class Cos{
 	
 			factorial = getFactorial(j);
 			previousValue = sum;
-			sum = (i/2*2==i) ? (sum - (double)(Math.pow(x, j))/factorial) : (sum + (double)(Math.pow(x, j))/factorial);
+			double powValue = (double)(Math.pow(x, j))/factorial;
+			sum = (i/2*2==i) ? (sum - powValue) : (sum + powValue);
 			currentValue = sum;
 			e = Math.abs(currentValue-previousValue);
 			j += 2;
@@ -35,6 +44,7 @@ public class Cos{
 		}
 		return sum;
 	}
+
 	public static double getFactorial(int j){
 		double factorial = 1;
 		for (int k = 1; k<=j; k++){
