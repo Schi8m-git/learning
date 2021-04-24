@@ -42,7 +42,8 @@ public class Sin{
 	
 			factorial = getFactorial(j);
 			previousValue = sum;
-			sum = (i/2*2==i) ? (sum - (double)(Math.pow(x, j))/factorial) : (sum + (double)(Math.pow(x, j))/factorial);
+			double powValue = (double)(Math.pow(x, j))/factorial;
+			sum = (i/2*2==i) ? (sum - powValue) : (sum + powValue);
 			currentValue = sum;
 			e = Math.abs(currentValue-previousValue);
 			j += 2;
