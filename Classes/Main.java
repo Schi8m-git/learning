@@ -3,9 +3,6 @@ import java.util.Scanner;
 public class Main{
 	public static void main(String[] args){
 		Scanner scan = new Scanner(System.in);
-		Sin sin = new Sin();
-		Cos cos = new Cos();
-		Tg tg = new Tg();
 
 		System.out.println("Привет, напиши что тебе нужно");
 		System.out.println("1 - вычисление синуса;");
@@ -16,13 +13,13 @@ public class Main{
 
 		switch(x){
 			case 1:
-			sin.countSin();
+			Sin.countSin();
 			break;
 			case 2:
-			cos.countCos();
+			Cos.countCos();
 			break;
 			case 3:
-			tg.countTg();
+			Tg.countTg();
 			break;
 		} 
 	}
