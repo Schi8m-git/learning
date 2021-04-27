@@ -15,11 +15,10 @@ public class Sin{
 			double  previousValue = 0;
 			double sum = 0;
 			double e = Math.abs(currentValue-previousValue);
-			Factorial fact = new Factorial();
 
 			while(e>=accuracy){
 	
-			factorial = fact.getFactorial(j);
+			factorial = Factorial.getFactorial(j);
 			previousValue = sum;
 			double powValue = (double)(Math.pow(x, j))/factorial;
 			sum = (i/2*2==i) ? (sum - powValue) : (sum + powValue);

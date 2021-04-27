@@ -11,11 +11,8 @@ public class Tg{
 		Scanner scan = new Scanner(System.in);
 		accuracy = scan.nextDouble();
 
-		Sin sin = new Sin();
-		double sinValue = sin.getSinValue(accuracy, arg);
-
-		Cos cos = new Cos();
-		double cosValue = cos.getCosValue(accuracy, arg);
+		double sinValue = Sin.getSinValue(accuracy, arg);
+		double cosValue = Cos.getCosValue(accuracy, arg);
 
 		double tg = sinValue/cosValue;
 		
