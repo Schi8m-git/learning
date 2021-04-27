@@ -30,10 +30,11 @@ public class Cos{
 		double  previousValue = 0;
 		double sum = 1;
 		double e = Math.abs(currentValue-previousValue);
+		Factorial fact = new Factorial();
 
 		while(e>=accuracy){
 	
-			factorial = getFactorial(j);
+			factorial = fact.getFactorial(j);
 			previousValue = sum;
 			double powValue = (double)(Math.pow(x, j))/factorial;
 			sum = (i/2*2==i) ? (sum - powValue) : (sum + powValue);
@@ -43,13 +44,5 @@ public class Cos{
 			i += 1;
 		}
 		return sum;
-	}
-
-	public static double getFactorial(int j){
-		double factorial = 1;
-		for (int k = 1; k<=j; k++){
-				factorial = factorial * k;
-			}
-		return factorial;
 	}
 }

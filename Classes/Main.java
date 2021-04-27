@@ -10,7 +10,7 @@ public class Main{
 		System.out.println("Привет, напиши что тебе нужно");
 		System.out.println("1 - вычисление синуса;");
 		System.out.println("2 - вычисление косинуса");
-		System.out.println("3 - вычислениетангенса");
+		System.out.println("3 - вычисление тангенса");
 
 		int x = scan.nextInt();
 
