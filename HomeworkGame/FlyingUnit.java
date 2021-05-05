@@ -1,0 +1,3 @@
+interface FlyingUnit{
+	void fly();
+}

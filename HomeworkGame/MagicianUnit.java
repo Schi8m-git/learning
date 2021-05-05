@@ -1,0 +1,4 @@
+abstract public class MagicianUnit extends Unit{
+	protected int manna;
+	abstract void spellCast();
+}
