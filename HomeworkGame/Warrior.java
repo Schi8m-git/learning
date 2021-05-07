@@ -7,39 +7,39 @@ public class Warrior extends Unit{
 					number = 0;
 					j = 0;
 				}
-				units[j+number].getDamage(damage);
+				units[j+number].getDamage(damage, type);
 				if(units[number+j].health>0){
 					System.out.println(units[currentNumber].name+" нанес "+units[currentNumber].damage+" урона "+units[j+number].name+" , теперь у него "+units[j+number].health+" хп.");
 				} else {
-					System.out.println(units[number+j].name+" был убит.");
+					System.out.println(units[currentNumber].name+" нанес "+units[currentNumber].damage+" урона "+units[j+number].name+" и убил его.");
 				}
 				j++;
 			}
 	}
 	public void move(){}
 	public void createStats(){
-		type = "hiking";
+		type = "chiking";
 		health = (int) (Math.random()*100);
 		attackPower = (int) (Math.random()*100);
 		speed = (int) (Math.random()*100);
 	}
-	public void getDamage(double damage){
-			health -= damage;
-			if (health<=0){
-				health = 0;
-				damage = 0;
-			}
-		}
+	public void getDamage(double damage, String type){
+		health -= damage;
+		if (health<=0){
+			this.health = 0;
+			this.damage = 0;
+		}	
+	}
 
 	public void info(){
 		if (health>0){
 		System.out.println(
-			"Name: "+name+"\n"+
-			"Health: "+health+"\n"+
+			"Имя: "+name+"\n"+
+			"Хп: "+health+"\n"+
 			"Урон:"+damage+"\n"+
-			"Атакует: "+numberOfAttaked+"\n"
+			"Атакует: "+numberOfAttaked+" персонажей."+"\n"
 		);} else {
-			System.out.println(name+" мертв.");
+			System.out.println(name+" мертв.\n");
 		}
 	}
 }

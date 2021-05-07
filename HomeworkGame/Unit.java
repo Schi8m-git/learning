@@ -10,5 +10,5 @@ abstract public class Unit{
 	abstract void attack(int number, Unit[] units);
 	abstract void createStats();
 	abstract void info();
-	abstract void getDamage(double damage);
+	abstract void getDamage(double damage, String type);
 }

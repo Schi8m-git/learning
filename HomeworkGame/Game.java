@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.lang.Math;
 public class Game{
 	public static void main (String[] args){
-		System.out.println("Привет. Выбери, что тебе нужно:\n1 - Начать игру\n2- Выход");
+		System.out.println("Привет. Выбери, что тебе нужно:\n1 - Начать игру\n2 - Выход");
 		Scanner scan = new Scanner(System.in);
 		int x = scan.nextInt();
 		while ((x!=1)&(x!=2)){
