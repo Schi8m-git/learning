@@ -1,11 +1,21 @@
 public class Bird extends Unit implements FlyingUnit{
-	public void attack(){
-		System.out.println("Bird's attack and have a "+health+" hp");
+	public void attack(){}
+	public void move(){}
+	public void fly(){}
+	public void createStats(){
+		health = (int) (Math.random()*100);
+		attackPower = (int) (Math.random()*100);
+		speed = (int) (Math.random()*100);
 	}
-	public void move(){
-		System.out.println("Bird's move");
-	}
-	public void fly(){
-		System.out.println("Bird is flying");
+
+	public void info(){
+		System.out.println(
+			"Name: "+name+"\n"+
+			"Power: "+attackPower+"\n"+
+			"Speed: "+speed+"\n"+
+			"Health: "+health+"\n"+
+			"я атакую "+numberOfAttaked+" юнитов\n"+
+			"Урон:"+damage+"\n"
+		);
 	}
 }

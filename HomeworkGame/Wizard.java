@@ -1,11 +1,23 @@
 public class Wizard extends MagicianUnit{
-	public void attack(){
-		System.out.println("Wizard's attack and have a "+health+" hp");
+	public void attack(){}
+	public void move(){}
+	public void spellCast(){}
+	public void createStats(){
+		health = (int) (Math.random()*100);
+		speed = (int) (Math.random()*100);
+		manna = (int) (Math.random()*100);
+		attackPower = (int) (Math.random()*100) + manna;
 	}
-	public void move(){
-		System.out.println("Wizard's move");
-	}
-	public void spellCast(){
-		System.out.println("Wizzard's spellCast");
+
+	public void info(){
+		System.out.println(
+			"Name: "+name+"\n"+
+			"Power: "+(attackPower-manna)+"\n"+
+			"Speed: "+speed+"\n"+
+			"Health: "+health+"\n"+
+			"Manna: "+manna+"\n"+
+			"я атакую "+numberOfAttaked+" юнитов\n"+
+			"Урон:"+damage+"\n"
+		);
 	}
 }
