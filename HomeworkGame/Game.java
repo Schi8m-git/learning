@@ -5,15 +5,19 @@ public class Game{
 		System.out.println("Привет. Выбери, что тебе нужно:\n1 - Начать игру\n2- Выход");
 		Scanner scan = new Scanner(System.in);
 		int x = scan.nextInt();
+		while ((x!=1)&(x!=2)){
+			System.out.println("Ты не туда нажал");
+			x = scan.nextInt();
+		}
 		switch (x) {
-			case (1): unitsCount = startGame();
+			case (1): startGame();
 			break;
 			case (2): System.out.println("Пока.");
 			break;
 		}
 	}
 	
-	private static int startGame(){
+	private static void startGame(){
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Какое количество воинов ты хочешь?");
 		int numberOfWarriors = scan.nextInt();
@@ -32,7 +36,6 @@ public class Game{
 			numberOfIkars,
 			numberOfMoves
 		);
-		return numberOfWarriors+numberOfWizards+numberOfBirds+numberOfIkars;
 	}
 
 
@@ -43,41 +46,54 @@ public class Game{
 		int numberOfIkars,
 		int numberOfMoves
 	){
+		int j=0;
 		int arrayLength = numberOfWarriors+numberOfWizards+numberOfBirds+numberOfIkars;
-		System.out.println("");
 		Unit[] units = new Unit[arrayLength];
-		for (int i = 0;i<numberOfWarriors;i++){
-			units[i] = new Warrior();
-			units[i].name = "Warrior"+(i+1);
+		Unit[] warr = new Unit[numberOfWarriors];
+		Unit[] wizz = new Unit[numberOfWizards];
+		Unit[] birds = new Unit[numberOfBirds];
+		Unit[] ikars = new Unit[numberOfIkars];
+
+		for (int i = 0; i<numberOfWarriors;i++){
+			warr[i] = new Warrior();
+			warr[i].name = "Warrior"+(i+1);
+			units[j] = warr[i];
+			j++;
 		}
-		for (int i = numberOfWarriors;i<numberOfWizards+numberOfWarriors;i++){
-			units[i] = new Wizard();
-			units[i].name = "Wizard"+(i+1);
+		for (int i = 0; i<numberOfWizards;i++){
+			wizz[i] = new Wizard();
+			wizz[i].name = "Wizzard"+(i+1);
+			units[j] = wizz[i];
+			j++;
 		}
-		for (int i = numberOfWarriors+numberOfWizards; i<arrayLength-numberOfIkars; i++){
-			units[i] = new Bird();
-			units[i].name = "Bird"+(i+1);
+		for (int i = 0; i<numberOfBirds;i++){
+			birds[i] = new Bird();
+			birds[i].name = "Bird"+(i+1);
+			units[j] = birds[i];
+			j++;
 		}
-		for (int i = numberOfWarriors+numberOfWizards+numberOfBirds; i<arrayLength; i++){
-			units[i] = new Ikar();
-			units[i].name = "Ikar"+(i+1);
+		for (int i = 0; i<numberOfIkars;i++){
+			ikars[i] = new Ikar();
+			ikars[i].name = "Ikar"+(i+1);
+			units[j] = ikars[i];
+			j++;
 		}
+
+
 		for (int i = 0;i<units.length;i++){
 			units[i].createStats();
-			units[i].numberOfAttaked = (units[i].speed*arrayLength)/100;
+			units[i].numberOfAttaked = (((units[i].speed*arrayLength)/100)<1)? 1: (units[i].speed*arrayLength)/100;
 			units[i].damage = (1-units[i].speed/100)*(units[i].attackPower);
 			units[i].info();
 		}
+
 		for (int i = 0; i<numberOfMoves;i++){
 			System.out.println("\n Ход №"+(i+1));
-			for (int j = 0; j<units.length;j++){
-				units[j].attack();
-				units[j].move();
+			for (int k = 0; k<units.length;k++){
+				units[k].attack(k,units);
+				units[k].move();
+				units[k].info();
 			}
 		}
-	}
-
-	public void	getWarriorDamage(double damage, String name){
-		System.out.println(name+" нанес "+damage+" урона");
 	}
 }

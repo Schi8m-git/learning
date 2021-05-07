@@ -1,8 +1,10 @@
 public class Wizard extends MagicianUnit{
-	public void attack(){}
+	public void attack(int number, Unit[] units){}
 	public void move(){}
 	public void spellCast(){}
+	public void getDamage(double damage){}
 	public void createStats(){
+		type = "hiking";
 		health = (int) (Math.random()*100);
 		speed = (int) (Math.random()*100);
 		manna = (int) (Math.random()*100);

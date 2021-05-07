@@ -5,8 +5,10 @@ abstract public class Unit{
 	protected int speed;
 	protected int numberOfAttaked;
 	protected double damage;
+	protected String type;
 	abstract void move();
-	abstract void attack();
+	abstract void attack(int number, Unit[] units);
 	abstract void createStats();
 	abstract void info();
+	abstract void getDamage(double damage);
 }
