@@ -1,6 +1,9 @@
 public class Ikar extends Unit implements FlyingUnit{
 	public void attack(){}
-	public void move(){}
+	public void move(){
+		// I'm can't move, just fly
+		fly();
+	}
 	public void fly(){}
 	public void createStats(){
 		health = (int) (Math.random()*100);

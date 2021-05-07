@@ -5,7 +5,6 @@ public class Game{
 		System.out.println("Привет. Выбери, что тебе нужно:\n1 - Начать игру\n2- Выход");
 		Scanner scan = new Scanner(System.in);
 		int x = scan.nextInt();
-		int unitsCount;
 		switch (x) {
 			case (1): unitsCount = startGame();
 			break;
