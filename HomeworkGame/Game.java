@@ -6,7 +6,7 @@ public class Game{
 		Scanner scan = new Scanner(System.in);
 		int x = scan.nextInt();
 		while ((x!=1)&(x!=2)){
-			System.out.println("Ты не туда нажал");
+			System.out.println("Прочитай еще раз и нажми правильно");
 			x = scan.nextInt();
 		}
 		switch (x) {
@@ -16,6 +16,7 @@ public class Game{
 			break;
 		}
 	}
+	
 	
 	private static void startGame(){
 		Scanner scan = new Scanner(System.in);
@@ -82,18 +83,32 @@ public class Game{
 
 		for (int i = 0;i<units.length;i++){
 			units[i].createStats();
-			units[i].numberOfAttaked = (((units[i].speed*arrayLength)/100)<1)? 1: (units[i].speed*arrayLength)/100;
+			units[i].attackRange = (((units[i].speed*arrayLength)/100)<1)? 1: (units[i].speed*arrayLength)/100;
 			units[i].damage = (1-units[i].speed/100)*(units[i].attackPower);
 			units[i].info();
 		}
+		gamesMove(units, numberOfMoves);
+	}
 
-		for (int i = 0; i<numberOfMoves;i++){
-			System.out.println("\n Ход №"+(i+1));
+
+	public static void gamesMove(Unit[] units, int numberOfMoves){
+		Scanner scan = new Scanner(System.in);
+		for (int i = 1; i<numberOfMoves;i++){
+			System.out.println("\n Ход №"+i);
 			for (int k = 0; k<units.length;k++){
 				units[k].attack(k,units);
 				units[k].move();
-				units[k].info();
 			}
-		}
-	}
+			System.out.println("\n Итоги хода:\n "+
+				"Внимание! Если в живых остался только один персонаж, лучше закончить игру).");
+			for (int g=0;g<units.length;g++){
+				units[g].info();
+			}
+			System.out.println("1 - следующий ход\n2 - выход");
+			int z = scan.nextInt();
+			if (z==2){
+				break;
+			}
+		}	
+	}	
 }

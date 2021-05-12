@@ -1,52 +1,74 @@
 public class Bird extends Unit implements FlyingUnit{
-	public void attack(int number,Unit[] units){
-		int currentNumber = number;
-		int j=1;
-			for(int i = 1; i<=numberOfAttaked;i++){
-				if ((i+number)>=units.length){
-					number = 0;
-					j = 0;
+	public void attack(int number, Unit[] units){
+		if (units[number].health>0){
+			String status="";
+			int currentNumber = number+1;
+			for(int i = 1; i<=units[number].attackRange;i++){
+				if (currentNumber>=units.length){
+					currentNumber = 0;
 				}
-				units[j+number].getDamage(damage,type);
-				if(units[number+j].health>0){
-					System.out.println(units[currentNumber].name+" нанес урон "+units[j+number].name+" , теперь у него "+units[j+number].health+" хп.");
-				} else {
-					System.out.println(units[currentNumber].name+" нанес "+units[currentNumber].damage+" урона "+units[j+number].name+" и убил его.");
+				while ((status=="longDead")|(currentNumber==number)){
+					currentNumber++;
+					if ((currentNumber)>=units.length){
+					currentNumber = 0;
+					}
 				}
-				j++;
+				status = units[currentNumber].getDamage(units[number].damage, units[number].type);
+				
+					if(status=="alive"){
+						System.out.println(units[number].name+" нанес "+units[number].damage+
+						" урона "+units[currentNumber].name+" , теперь у него "+units[currentNumber].health+" хп.");
+					} else if(status=="dead"){
+						System.out.println(units[number].name+" нанес "+units[number].damage+
+						" урона "+units[currentNumber].name+" и убил его.");
+					}
+					currentNumber++;
 			}
-	}
-	public void fly(){}
-	public void move(){}
-	public void createStats(){
-		type = "flying";
-		health = (int) (Math.random()*100);
-		attackPower = (int) (Math.random()*100);
-		speed = (int) (Math.random()*100);
-	}
-	public void getDamage(double damage, String type){
-		if (type=="flying"){
-		this.health -= damage;	
-	} else{
-		this.health -= damage/2;
+		}
 	}
 
-		
-		if (health<=0){
-			this.health = 0;
-			this.damage = 0;
-		}	
+	public void fly(){}
+
+
+	public void move(){}
+
+
+	public void createStats(){
+		type = "flying";
+		health = 1 + (int) (Math.random()*100);
+		attackPower = 1 + (int) (Math.random()*100);
+		speed = 1 + (int) (Math.random()*100);
 	}
+
+
+	public String getDamage(double damage, String type){
+		if (health == 0){
+			return "longDead";
+		} else{
+			if (type=="hicking"){
+				health -= (damage/2);
+			}else{
+			health -= damage;
+			}
+			if (health<=0){
+				health = 0;
+				this.damage = 0;
+				return "dead";
+			}	
+		}
+		return "alive";
+	}
+
 
 	public void info(){
 		if (health>0){
 		System.out.println(
-			"Имя: "+name+"\n"+
-			"Хп: "+health+"\n"+
-			"Урон:"+damage+"\n"+
-			"Атакует: "+numberOfAttaked+" персонажей."+"\n"
+			"Имя: "+name+
+			", Хп: "+health+
+			", Урон:"+damage+
+			", Атакует: "+attackRange+" персонажей."
 		);} else {
-			System.out.println(name+" мертв.\n");
+			System.out.println(name+" мертв.");
 		}
 	}
 }
