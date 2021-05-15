@@ -4,13 +4,14 @@ import java.lang.Object;
 
 /**
 *@author schi8m
-*@version HomeworkGame in alpha 2.1
-*@since HomeworkGame in alpha 1.1
+*@version HomeworkGame in alpha 2.2
+*@since HomeworkGame in alpha 2.1
 * Главный класс программы.
 */
 public class Game{
 	public static void main (String[] args){
-		System.out.println("Привет. Выбери, что тебе нужно:\n1 - Начать игру\n2 - Выход");
+		System.out.println("Привет. Выбери, что тебе"+
+			" нужно:\n1 - Начать игру\n2 - Выход");
 		Scanner scan = new Scanner(System.in);
 		boolean isContinue = true;
 		while (isContinue){
@@ -110,8 +111,67 @@ public class Game{
 		for (int i = 1; i<=numberOfMoves;i++){
 			System.out.println("\n Ход №"+i);
 			for (int k = 0; k<units.length;k++){
-				units[k].attack(k,units);
-				units[k].move();
+
+				
+
+				if (units[k].health>0){
+				int targetNumber = k+1;	
+				for(int z = 0; z<units[k].attackRange;z++){
+					if (targetNumber>=units.length){
+						targetNumber = 0;
+					}
+
+					while (
+						(units[targetNumber].status==Unit.LONG_DEAD)|
+						(targetNumber==k)|
+						(units[targetNumber].status==Unit.DEAD)
+						){
+						targetNumber++;
+						if ((targetNumber)>=units.length){
+						targetNumber = 0;
+						}
+					}
+
+					if ((units[targetNumber] instanceof FlyingUnit)&(units[k] instanceof HickingUnit)){
+						units[targetNumber].health -= (units[k].damage/2);
+						units[targetNumber].checkStatus();
+
+						if(units[targetNumber].status==Unit.ALIVE){
+							System.out.println(units[k].name+
+								" нанес "+(units[k].damage/2)+
+								" урона "+units[targetNumber].name+
+								", теперь у него "+
+							units[targetNumber].health+" хп. Наземный -->> Летающий");
+						} else if(units[targetNumber].status==Unit.DEAD){
+							System.out.println(units[k].name+
+								" нанес "+units[k].damage+
+								" урона "+units[targetNumber].name+
+								" и убил его.");
+						}
+					} else{
+						units[targetNumber].health -= units[k].damage;
+						units[targetNumber].checkStatus();
+						if(units[targetNumber].status==Unit.ALIVE){
+							System.out.println(units[k].name+
+								" нанес "+units[k].damage+
+								" урона "+units[targetNumber].name+
+								" , теперь у него "+
+							units[targetNumber].health+" хп.");
+						} else if(units[targetNumber].status==Unit.DEAD){
+							System.out.println(units[k].name+
+								" нанес "+units[k].damage+
+								" урона "+units[targetNumber].name+
+								" и убил его.");
+						}
+					}
+						
+						targetNumber++;
+						boolean isOnlyOneAlive = scanAlives(units);
+						if (isOnlyOneAlive){
+							break;
+						}
+					}
+				}
 			}
 			System.out.println("\n Итоги хода:\n "+
 				"Внимание! Если в живых остался только один персонаж, лучше закончить игру).");

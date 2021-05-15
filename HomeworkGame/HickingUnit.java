@@ -1,0 +1,3 @@
+interface HickingUnit{
+	void walk();
+}

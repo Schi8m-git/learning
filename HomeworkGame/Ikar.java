@@ -1,53 +1,6 @@
 public class Ikar extends Unit implements FlyingUnit{
 
-	/**
-	*Метод, который атакует других юнитов.
-	*@param number номер текущего юнита в массиве Unit[].
-	*@param units массив со всеми персонажами.
-	*/
-	public void attack(int number, Unit[] units){
-		if (units[number].health>0){
-			int currentNumber = number+1;	
-			for(int i = 0; i<units[number].attackRange;i++){
-				if (currentNumber>=units.length){
-					currentNumber = 0;
-				}
-				while (
-					(units[currentNumber].status==LONG_DEAD)|
-					(currentNumber==number)|
-					(units[currentNumber].status==DEAD)
-					){
-					currentNumber++;
-					if ((currentNumber)>=units.length){
-					currentNumber = 0;
-					}
-				}
-				units[currentNumber].health -= units[number].damage;
-				units[currentNumber].checkStatus();
-				if(units[currentNumber].status==ALIVE){
-					System.out.println(units[number].name+
-						" нанес "+units[number].damage+
-						" урона "+units[currentNumber].name+
-						" , теперь у него "+
-					units[currentNumber].health+" хп.");
-					} else if(units[currentNumber].status==DEAD){
-						System.out.println(units[number].name+
-							" нанес "+units[number].damage+
-							" урона "+units[currentNumber].name+
-							" и убил его.");
-				}
-				currentNumber++;
-				boolean statement;
-				statement = Game.scanAlives(units);
-				if (statement){
-					break;
-				}
-			}		
-		}
-	}
-
-
-	public void move(){}
+	public void attack(){}
 
 
 	public void fly(){}
@@ -57,9 +10,9 @@ public class Ikar extends Unit implements FlyingUnit{
 	* Генерирует рандомные хар-ки.
 	*/
 	public void createStats(){
-		health = 1 + (int) (Math.random()*RAND_VALUE);
-		attackPower = 1 + (int) (Math.random()*RAND_VALUE);
-		speed = 1 + (int) (Math.random()*RAND_VALUE);
+		health = 1 + (int) (Math.random()*MAX_VALUE);
+		attackPower = 1 + (int) (Math.random()*MAX_VALUE);
+		speed = 1 + (int) (Math.random()*MAX_VALUE);
 		status = ALIVE;
 	}
 

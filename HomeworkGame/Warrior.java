@@ -1,79 +1,17 @@
-public class Warrior extends Unit{
+public class Warrior extends Unit implements HickingUnit{
 
-	/**
-	*Метод, который атакует других юнитов.
-	*@param number номер текущего юнита в массиве Unit[].
-	*@param units массив со всеми персонажами.
-	*/
-	public void attack(int number, Unit[] units){
-		if (units[number].health>0){
-			int currentNumber = number+1;	
-			for(int i = 0; i<units[number].attackRange;i++){
-				if (currentNumber>=units.length){
-					currentNumber = 0;
-				}
-				while (
-					(units[currentNumber].status==LONG_DEAD)|
-					(currentNumber==number)|
-					(units[currentNumber].status==DEAD)
-					){
-					currentNumber++;
-					if ((currentNumber)>=units.length){
-					currentNumber = 0;
-					}
-				}
-				if (units[currentNumber] instanceof FlyingUnit){
-					units[currentNumber].health -= (units[number].damage/2);
-					units[currentNumber].checkStatus();
-					if(units[currentNumber].status==ALIVE){
-						System.out.println(units[number].name+
-							" нанес "+(units[number].damage)+
-							" урона "+units[currentNumber].name+
-							", теперь у него "+
-						units[currentNumber].health+" хп. Наземный -->> Летающий");
-					} else if(units[currentNumber].status==DEAD){
-						System.out.println(units[number].name+
-							" нанес "+units[number].damage+
-							" урона "+units[currentNumber].name+
-							" и убил его.");
-					}
-				} else{
-					units[currentNumber].health -= units[number].damage;
-					units[currentNumber].checkStatus();
-					if(units[currentNumber].status==ALIVE){
-						System.out.println(units[number].name+
-							" нанес "+units[number].damage+
-							" урона "+units[currentNumber].name+
-							" , теперь у него "+
-						units[currentNumber].health+" хп.");
-					} else if(units[currentNumber].status==DEAD){
-						System.out.println(units[number].name+
-							" нанес "+units[number].damage+
-							" урона "+units[currentNumber].name+
-							" и убил его.");
-					}
-				}
-					
-					currentNumber++;
-					boolean statement;
-					statement = Game.scanAlives(units);
-					if (statement){
-						break;
-					}
-			}
-		}
-	}
+	public void attack(){}
 
 
-	public void move(){}
+	public void walk(){}
 
 	/**
 	* Генерирует рандомные хар-ки.
 	*/
 	public void createStats(){
-		health = 1 + (int) (Math.random()*RAND_VALUE);
-		attackPower = 1 + (int) (Math.random()*RAND_VALUE);
-		speed = 1 + (int) (Math.random()*RAND_VALUE);
+		health = 1 + (int) (Math.random()*MAX_VALUE);
+		attackPower = 1 + (int) (Math.random()*MAX_VALUE);
+		speed = 1 + (int) (Math.random()*MAX_VALUE);
 		status = ALIVE;
 	}
 
