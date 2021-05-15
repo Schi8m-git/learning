@@ -1,28 +1,65 @@
 public class Wizard extends MagicianUnit{
+
+	/**
+	*Метод, который атакует других юнитов.
+	*@param number номер текущего юнита в массиве Unit[].
+	*@param units массив со всеми персонажами.
+	*/
 	public void attack(int number, Unit[] units){
 		if (units[number].health>0){
-			String status="";
-			int currentNumber = number+1;
-			for(int i = 1; i<=units[number].attackRange;i++){
+			int currentNumber = number+1;	
+			for(int i = 0; i<units[number].attackRange;i++){
 				if (currentNumber>=units.length){
 					currentNumber = 0;
 				}
-				while ((status=="longDead")|(currentNumber==number)){
+				while (
+					(units[currentNumber].status==LONG_DEAD)|
+					(currentNumber==number)|
+					(units[currentNumber].status==DEAD)
+					){
 					currentNumber++;
 					if ((currentNumber)>=units.length){
 					currentNumber = 0;
 					}
 				}
-				status = units[currentNumber].getDamage(units[number].damage, units[number].type);
-				
-					if(status=="alive"){
-						System.out.println(units[number].name+" нанес "+units[number].damage+
-						" урона "+units[currentNumber].name+" , теперь у него "+units[currentNumber].health+" хп.");
-					} else if(status=="dead"){
-						System.out.println(units[number].name+" нанес "+units[number].damage+
-						" урона "+units[currentNumber].name+" и убил его.");
+				if (units[currentNumber] instanceof FlyingUnit){
+					units[currentNumber].health -= (units[number].damage/2);
+					units[currentNumber].checkStatus();
+					if(units[currentNumber].status==ALIVE){
+						System.out.println(units[number].name+
+							" нанес "+(units[number].damage)+
+							" урона "+units[currentNumber].name+
+							", теперь у него "+
+						units[currentNumber].health+" хп. Наземный -->> Летающий");
+					} else if(units[currentNumber].status==DEAD){
+						System.out.println(units[number].name+
+							" нанес "+units[number].damage+
+							" урона "+units[currentNumber].name+
+							" и убил его.");
 					}
+				} else{
+					units[currentNumber].health -= units[number].damage;
+					units[currentNumber].checkStatus();
+					if(units[currentNumber].status==ALIVE){
+						System.out.println(units[number].name+
+							" нанес "+units[number].damage+
+							" урона "+units[currentNumber].name+
+							" , теперь у него "+
+						units[currentNumber].health+" хп.");
+					} else if(units[currentNumber].status==DEAD){
+						System.out.println(units[number].name+
+							" нанес "+units[number].damage+
+							" урона "+units[currentNumber].name+
+							" и убил его.");
+					}
+				}
+					
 					currentNumber++;
+					boolean statement;
+					statement = Game.scanAlives(units);
+					if (statement){
+						break;
+					}
 			}
 		}
 	}
@@ -31,41 +68,50 @@ public class Wizard extends MagicianUnit{
 	public void move(){}
 
 
+	/**
+	* Генерирует рандомные хар-ки.
+	*/
 	public void createStats(){
-		type = "hicking";
-		health = 1 + (int) (Math.random()*100);
-		manna = 1 + (int) (Math.random()*100);
-		attackPower = 1 + (int) (Math.random()*100) + manna;
-		speed = 1 + (int) (Math.random()*100);
+		health = 1 + (int) (Math.random()*RAND_VALUE);
+		attackPower = 1 + (int) (Math.random()*RAND_VALUE);
+		speed = 1 + (int) (Math.random()*RAND_VALUE);
+		manna = 1 + (int) (Math.random()*RAND_VALUE);
+		status = ALIVE;
 
 	}
 
 
-	public String getDamage(double damage, String type){
+	/**
+	*Меняет статут юнита после получения урона.
+	*/
+	public void checkStatus(){
 		if (health == 0){
-			return "longDead";
-		} else{
-			health -= damage;
-			if (health<=0){
-				health = 0;
-				this.damage = 0;
-				return "dead";
-			}	
+			status = LONG_DEAD;
+		} else if (health<0){
+			health = 0;
+			damage = 0;
+			status = DEAD;
+		}else{
+			status = ALIVE;
 		}
-		return "alive";
 	}
 
 
-	public void info(){
+
+	/**
+	* Выводит инфу о юните.
+	*/
+	@Override
+	public String toString(){
 		if (health>0){
-		System.out.println(
+		return
 			"Имя: "+name+
 			", Хп: "+health+
-			", Урон:"+damage+
-			", Атакует: "+attackRange+" персонажей"+
-			", Манна: "+manna
-		);} else {
-			System.out.println(name+" мертв.");
+			", Урон: "+damage+
+			", Манна: "+manna+
+			", Атакует: "+attackRange+" персонажей."
+		;} else {
+			return name+" мертв.";
 		}
 	}
 }
