@@ -4,8 +4,8 @@ import java.lang.Object;
 
 /**
 *@author schi8m
-*@version HomeworkGame in alpha 2.3
-*@since HomeworkGame in alpha 2.2
+*@version HomeworkGame in alpha 2.4
+*@since HomeworkGame in alpha 2.3
 * Класс - интерфейс взаимодействия с пользователем.
 */
 
