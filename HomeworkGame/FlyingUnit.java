@@ -1,3 +1,1 @@
-interface FlyingUnit{
-	void fly();
-}
+interface FlyingUnit{}

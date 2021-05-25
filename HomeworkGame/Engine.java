@@ -92,7 +92,7 @@ public class Engine{
 							System.out.println(units[k].name+
 								" нанес "+units[k].damage+
 								" урона "+units[targetNumber].name+
-								" и убил его.");
+								" и убил его. Наземный -->> Летающий");
 						}
 					} else{
 						units[targetNumber].health -= units[k].damage;

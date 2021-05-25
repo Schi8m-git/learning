@@ -1,3 +1,1 @@
-interface HickingUnit{
-	void walk();
-}
+interface HickingUnit{}

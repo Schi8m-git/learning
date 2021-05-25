@@ -1,10 +1,5 @@
 public class Warrior extends Unit implements HickingUnit{
 
-	public void attack(){}
-
-
-	public void walk(){}
-
 	/**
 	* Генерирует рандомные хар-ки.
 	*/

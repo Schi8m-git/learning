@@ -1,12 +1,5 @@
 public class Wizard extends MagicianUnit implements HickingUnit{
 
-	public void attack(){}
-	
-
-	public void spellCast(){};
-
-	public void walk(){}
-
 
 	/**
 	* Генерирует рандомные хар-ки.

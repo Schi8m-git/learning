@@ -11,7 +11,6 @@ abstract public class Unit{
 	protected int attackRange;
 	protected double damage;
 	protected String status;
-	abstract void attack();
 	abstract void createStats();
 	abstract void checkStatus();
 }

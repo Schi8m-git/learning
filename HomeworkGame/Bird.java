@@ -1,12 +1,5 @@
 public class Bird extends Unit implements FlyingUnit{
 
-	public void attack(){}
-
-
-	public void fly(){}
-
-
-
 	/**
 	* Генерирует рандомные хар-ки.
 	*/
