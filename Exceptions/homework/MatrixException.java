@@ -5,25 +5,25 @@ public class MatrixException{
 	public static void main(String[] args){
 		Scanner scan = new Scanner(System.in);
 		int hight1=0; int hight2=0; int width1=0; int width2=0;
-		while (true){
-			System.out.println("Введите высоту матрицы 1");
-			hight1 = trier();
-			System.out.println("Введите ширину матрицы 1");
-			width1 = trier();
-			System.out.println("Введите высоту матрицы 2");
-			hight2 = trier();
-			System.out.println("Введите ширину матрицы 2");
-			width2 = trier();
-			if(hight1==width2){
-				break;
-			} else{
-				System.out.println("Эти матрицы нельзя умножить, попробуй еще раз");
-			}
-		}
-		int[][] matrix1 = matrixCreator(hight1, width1);
-		int[][] matrix2 = matrixCreator(hight2, width2);
 
-		int[][] resultMatrix = Counter.multiplyMatrix(matrix1, matrix2, hight1, width1, width2);
+		boolean isNotProportionate = true;
+		while (isNotProportionate){
+			System.out.println("Введите высоту матрицы 1");
+			hight1 = catchExceptions();
+			System.out.println("Введите ширину матрицы 1");
+			width1 = catchExceptions();
+			System.out.println("Введите высоту матрицы 2");
+			hight2 = catchExceptions();
+			System.out.println("Введите ширину матрицы 2");
+			width2 = catchExceptions();
+			if (hight1==width2){
+				isNotProportionate = false;
+			}else{System.out.println("Такие матрицы нельзя умножить");}
+		}
+		int[][] matrix1 = createMatrix(hight1, width1);
+		int[][] matrix2 = createMatrix(hight2, width2);
+
+		int[][] resultMatrix = Counter.multiplyMatrix(matrix1, matrix2);
 		for(int i=0; i<hight1; i++){
 			for (int j=0; j<width2; j++){
 				System.out.print(resultMatrix[i][j]+" ");
@@ -32,7 +32,7 @@ public class MatrixException{
 		}
 	}
 
-	public static int[][] matrixCreator(int a, int b){
+	public static int[][] createMatrix(int a, int b){
 		int[][] matrix = new int[a][b];
 		for(int i=0; i<a; i++){
 			for(int j=0; j<b; j++){
@@ -41,11 +41,12 @@ public class MatrixException{
 			}
 			System.out.println("");
 		}
+		System.out.println("");
 		return matrix;
 	}
 
 
-	public static int trier(){
+	public static int catchExceptions(){
 		Scanner scan = new Scanner(System.in);
 		int a = 0;
 		while(true){
