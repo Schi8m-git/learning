@@ -11,7 +11,6 @@ public class Counter{
 					for (int j=0; j<matrix1[0].length; j++){
 						
 							resultMatrix[i][k] += matrix1[i][j]*matrix2[j][k];
-							MatrixException.isNotProportionate = false;
 						}
 						
 				}
