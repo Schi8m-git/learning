@@ -9,14 +9,15 @@ public class MatrixIO{
 	public static void main(String[] args) throws IOException{
 		System.out.println("Привет, эта программа складывает матрицы" + 
 			", считываемые из файлов на устройстве.\n");
-		System.out.println("Для начала нажмите" + (char)34 + "Enter" + (char)34 + ", для выхода - " + (char)34 + "Esc" + (char)34);
+		System.out.println("Для начала нажмите \"Enter\", для выхода - \"Esc\"");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		int currentReadByte = reader.read();
 		switch (currentReadByte){
 			case (10): 
 				start();
 				break;
-			case(0x1B):
+			case(27):
+				System.exit(0);
 				break;
 		}
 		
@@ -24,16 +25,14 @@ public class MatrixIO{
 
 
 	public static void start()throws IOException{
-		System.out.println(" Введите путь к файлу с первой матрицей:");
-		String fileDestination1 = getFileDestination();
-		System.out.println("Введите путь к файлу со второй матрицей:");
-		String fileDestination2 = getFileDestination();
+		String fileDestination1 = getFileDestination(1);
+		String fileDestination2 = getFileDestination(2);
 		int[][] matrix1 = null;
 		int[][] matrix2 = null;
 
 		if((fileDestination1 != null)&(fileDestination2 != null)){
-			matrix1 = readMatrixFromFile(fileDestination1);
-			matrix2 = readMatrixFromFile(fileDestination2);
+			matrix1 = readMatrixFromFile(fileDestination1, 1);
+			matrix2 = readMatrixFromFile(fileDestination2, 2);
 		}
 
 		int[][] resultMatrix = matrixSummator(matrix1, matrix2);
@@ -45,14 +44,15 @@ public class MatrixIO{
 		matrixPrinter(resultMatrix);
 	}
 
-	public static String getFileDestination()throws IOException{
-		System.out.println("Для ввода пути нажмите " + (char)34 +"Enter" + (char)34 +", для выхода нажмите " + (char)34 + "Esc" + (char)34);
+	public static String getFileDestination(int numberOfMatrix)throws IOException{
+		System.out.println("Для ввода пути к файлу с " + numberOfMatrix + " матрицей нажмите \"Enter\", для выхода нажмите \"Esc\" ");
 		String fileDestination = "";
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		int currentReadByte = reader.read();
-		if (currentReadByte == 0x1B){
+		if (currentReadByte == 27){
 			System.out.println("Была нажата esc");
-			start();
+			String[] args = new String[1];
+			main(args); 
 		} else{
 			fileDestination = reader.readLine();
 		}
@@ -61,10 +61,10 @@ public class MatrixIO{
 
 
 
-	public static int[][] readMatrixFromFile(String fileDestination) throws IOException{
+	public static int[][] readMatrixFromFile(String fileDestination, int numberOfMatrix) throws IOException{
 		ArrayList<String> arrayStringList = new ArrayList<String>();
-		boolean fileNotFound = true;
-		while (fileNotFound){
+		boolean incorrectFileDestination = true;
+		while (incorrectFileDestination){
 			try{
 				BufferedReader in = new BufferedReader(new FileReader(fileDestination));	
 				String currentReadString = in.readLine();
@@ -74,10 +74,10 @@ public class MatrixIO{
 						currentReadString = in.readLine();
 					}
 				}
-				fileNotFound = false;
+				incorrectFileDestination = false;
 			} catch (FileNotFoundException e){
 				System.out.println("Файл "+ fileDestination+ " не найден, попробуй еще раз.");
-				fileDestination = getFileDestination();
+				fileDestination = getFileDestination(numberOfMatrix);
 			}
 		}
 		String[] arrayOfStrings = arrayStringList.toArray(new String[arrayStringList.size()]);
@@ -94,17 +94,18 @@ public class MatrixIO{
 	}
 
 
-	public static int[][] matrixSummator(int[][] matrix1, int[][] matrix2){
+	public static int[][] matrixSummator(int[][] matrix1, int[][] matrix2) throws IOException{
 		int[][] resultMatrix = null;
-		if ((matrix1.length == matrix2.length)&(matrix1[0].length == matrix2[0].length)){
+		try{
 			resultMatrix = new int[matrix1.length][matrix1[0].length];
 			for (int i = 0; i<resultMatrix.length; i++){
 				for (int j = 0; j<resultMatrix[0].length; j++){
 					resultMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
 				}
 			}
-		}else{
-			System.out.println("Матрицы разного размера, укажите другие.");
+		} catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("Матрицы разного размера, их нельзя сложить.");
+			start();
 		}
 		return resultMatrix;
 	}
