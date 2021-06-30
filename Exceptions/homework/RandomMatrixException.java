@@ -1,3 +1,5 @@
+import calculator.UnProportionalMatrixException;
+import calculator.Counter;
 
 public class RandomMatrixException{
 	public static void main(String[] args){
@@ -7,11 +9,16 @@ public class RandomMatrixException{
 		int width1 = 1 + (int)(Math.random()*10);
 		int[][] matrix1 = createMatrix(hight1, width1);
 		int[][] matrix2 = createMatrix(hight2, width2);
-		int[][] resultMatrix = Counter.multiplyMatrix(matrix1, matrix2);
-
-		printMatrix(matrix1);
-		printMatrix(matrix2);
-		printMatrix(resultMatrix);
+		int[][] resultMatrix = null;
+		try{
+			resultMatrix = Counter.multiplyMatrix(matrix1, matrix2);
+			printMatrix(matrix1);
+			printMatrix(matrix2);
+			printMatrix(resultMatrix);
+		} catch (UnProportionalMatrixException e){
+			System.out.println("Такие матрицы нельзя умножать.");
+		}	
+		
 		
 	}
 

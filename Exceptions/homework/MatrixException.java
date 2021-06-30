@@ -1,5 +1,8 @@
+import calculator.Counter;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import calculator.UnProportionalMatrixException;
+
 
 public class MatrixException{
 	public static void main(String[] args){
@@ -14,15 +17,19 @@ public class MatrixException{
 			hight2 = fetchIntFromConsole();
 			System.out.println("Введите ширину матрицы 2");
 			width2 = fetchIntFromConsole();
-			
+			int[][] resultMatrix = null;
 			int[][] matrix1 = createMatrix(hight1, width1);
 			int[][] matrix2 = createMatrix(hight2, width2);
+			try{
+				resultMatrix = Counter.multiplyMatrix(matrix1, matrix2);
+				printMatrix(matrix1);
+				printMatrix(matrix2);
+				printMatrix(resultMatrix);
+			} catch (UnProportionalMatrixException e){
+				System.out.println("Такие матрицы нельзя умножать.");
+			}
 
-			int[][] resultMatrix = Counter.multiplyMatrix(matrix1, matrix2);
-
-			printMatrix(matrix1);
-			printMatrix(matrix2);
-			printMatrix(resultMatrix);
+			
 	}
 
 	public static int[][] createMatrix(int a, int b){
