@@ -6,53 +6,64 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 
 public class MatrixIO{
+	public static boolean escWasntPressedInMain = true;
+	public static boolean escWasntPressedInStart = true;
+
+
 	public static void main(String[] args) throws IOException{
-		System.out.println("Привет, эта программа складывает матрицы" + 
+		while (escWasntPressedInMain){
+			System.out.println("Привет, эта программа складывает матрицы" + 
 			", считываемые из файлов на устройстве.\n");
-		System.out.println("Для начала нажмите \"Enter\", для выхода - \"Esc\"");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		int currentReadByte = reader.read();
-		switch (currentReadByte){
-			case (10): 
+			System.out.println("Для начала нажмите \"Enter\", для выхода - \"Esc\"");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			int currentReadByte = reader.read();
+			if (currentReadByte == 27){
+				escWasntPressedInMain = false;
+			}	
+			if (currentReadByte == 10){
 				start();
-				break;
-			case(27):
-				System.exit(0);
-				break;
+			}
 		}
-		
 	}
 
 
 	public static void start()throws IOException{
-		String fileDestination1 = getFileDestination(1);
-		String fileDestination2 = getFileDestination(2);
-		int[][] matrix1 = null;
-		int[][] matrix2 = null;
+		while (escWasntPressedInStart){
+			String fileDestination1 = getFileDestination(1);
+			String fileDestination2 = getFileDestination(2);
 
-		if((fileDestination1 != null)&(fileDestination2 != null)){
-			matrix1 = readMatrixFromFile(fileDestination1, 1);
-			matrix2 = readMatrixFromFile(fileDestination2, 2);
+			if (escWasntPressedInStart){
+				int[][] matrix1 = null;
+				int[][] matrix2 = null;
+	
+				
+				if((fileDestination1 != null)&(fileDestination2 != null)){
+					matrix1 = readMatrixFromFile(fileDestination1, 1);
+					matrix2 = readMatrixFromFile(fileDestination2, 2);
+				}
+				try{
+					int[][] resultMatrix = matrixSummator(matrix1, matrix2);
+					System.out.println("В результате сложения матрицы: \n");
+					matrixPrinter(matrix1);
+					System.out.println("И матрицы: \n");
+					matrixPrinter(matrix2);
+					System.out.println("Получилась матрица: \n");
+					matrixPrinter(resultMatrix);
+				} catch (UnProportionalMatrixException e){
+					System.out.println("Матрицы разного размера, их нельзя складывать.");
+				}
+			}
 		}
-
-		int[][] resultMatrix = matrixSummator(matrix1, matrix2);
-		System.out.println("В результате сложения матрицы: \n");
-		matrixPrinter(matrix1);
-		System.out.println("И матрицы: \n");
-		matrixPrinter(matrix2);
-		System.out.println("Получилась матрица: \n");
-		matrixPrinter(resultMatrix);
 	}
 
 	public static String getFileDestination(int numberOfMatrix)throws IOException{
 		System.out.println("Для ввода пути к файлу с " + numberOfMatrix + " матрицей нажмите \"Enter\", для выхода нажмите \"Esc\" ");
-		String fileDestination = "";
+		String fileDestination = null;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		int currentReadByte = reader.read();
 		if (currentReadByte == 27){
 			System.out.println("Была нажата esc");
-			String[] args = new String[1];
-			main(args); 
+			escWasntPressedInStart = false;
 		} else{
 			fileDestination = reader.readLine();
 		}
@@ -75,6 +86,7 @@ public class MatrixIO{
 					}
 				}
 				incorrectFileDestination = false;
+				in.close();
 			} catch (FileNotFoundException e){
 				System.out.println("Файл "+ fileDestination+ " не найден, попробуй еще раз.");
 				fileDestination = getFileDestination(numberOfMatrix);
@@ -94,19 +106,17 @@ public class MatrixIO{
 	}
 
 
-	public static int[][] matrixSummator(int[][] matrix1, int[][] matrix2) throws IOException{
+	public static int[][] matrixSummator(int[][] matrix1, int[][] matrix2) throws UnProportionalMatrixException{
+		if ((matrix1.length != matrix2.length)|(matrix1[0].length != matrix2[0].length)){
+			throw new UnProportionalMatrixException();
+		}
 		int[][] resultMatrix = null;
-		try{
 			resultMatrix = new int[matrix1.length][matrix1[0].length];
 			for (int i = 0; i<resultMatrix.length; i++){
 				for (int j = 0; j<resultMatrix[0].length; j++){
 					resultMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
 				}
 			}
-		} catch(ArrayIndexOutOfBoundsException e){
-			System.out.println("Матрицы разного размера, их нельзя сложить.");
-			start();
-		}
 		return resultMatrix;
 	}
 
